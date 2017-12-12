@@ -1,4 +1,4 @@
-rootProject.name = 'ReactNativeBoilerplate'
+rootProject.name = 'SimpleBoilerplate'
 include ':app'
 
 include ':react-native-navigation'

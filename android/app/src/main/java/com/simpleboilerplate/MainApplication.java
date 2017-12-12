@@ -1,4 +1,4 @@
-package com.reactnativeboilerplate;
+package com.simpleboilerplate;
 
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;

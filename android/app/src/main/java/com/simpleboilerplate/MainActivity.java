@@ -1,4 +1,4 @@
-package com.reactnativeboilerplate;
+package com.simpleboilerplate;
 
 import com.reactnativenavigation.controllers.SplashActivity;
 
