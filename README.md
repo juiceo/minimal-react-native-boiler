@@ -1,5 +1,5 @@
 # minimal-react-native-boiler
-An up-to-date and very minimal React Native boilerplate with just the essentials (navigation & redux), no extra BS included.
+An up-to-date and very minimal React Native boilerplate with just the essentials (navigation & redux). Most boilerplates are bloated with a huge amount of extra features, and while that is useful for many applications, it takes awfully long to learn how to use the boilerplate "correctly". This boilerplate will have you coding in minutes, and you can then add more features as you need them.
 
 # Features
 
@@ -23,3 +23,15 @@ That's it! If you wish to rename the app and package names, you can run (from th
 npm install -g react-native-rename
 react-native-rename yourAppName
 ```
+
+# Versions
+
+**Barebones**
+
+* `master` branch of this repository
+* Contains one screen and a very minimal example of how to use redux
+
+**Countries Example**
+* `countries-example` branch of this repository
+* Contains a slightly bigger example, which uses a few essential libraries and utility functions
+* Showcases some best practices (in my personal opinion) regarding redux/styling/structure among other things
