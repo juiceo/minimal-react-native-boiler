@@ -1,1 +1,2 @@
-export const REFRESH_COUNTRIES = 'REFRESH_COUNTRIES';
+export const EXAMPLE_ACTION = 'EXAMPLE_ACTION';
+//TODO: Declare other action types here

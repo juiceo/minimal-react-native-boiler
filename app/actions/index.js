@@ -1,7 +1,8 @@
-import * as CountryActions from './countries';
+import * as ExampleActions from './example';
 
 const actions = {
-    ...CountryActions
+    ...ExampleActions,
+    // TODO: Add other actions here
 };
 
-export default actions;
+module.exports = actions;

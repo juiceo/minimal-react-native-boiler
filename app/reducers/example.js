@@ -2,19 +2,15 @@ import { updateState } from '../utils/reduxHelpers'
 import * as ActionTypes from "../constants/actionTypes"
 
 let initialState = {
-    countries: [],
-    loading: false,
-    error: false
+    pressCount: 0
 };
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case ActionTypes.REFRESH_COUNTRIES:
+        case ActionTypes.EXAMPLE_ACTION:
 
             const updates = {
-                countries: action.payload,
-                loading: false,
-                error: false
+                pressCount: state.pressCount + 1
             };
             state = updateState(state, updates);
 
