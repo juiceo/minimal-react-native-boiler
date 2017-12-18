@@ -10,7 +10,7 @@ registerScreens(store, Provider);
 Navigation.startSingleScreenApp({
     screen: {
         screen: 'myApp.Home',
-        title: 'Home',
+        title: 'All Countries',
         navigatorStyle: {},
         navigatorButtons: {}
     },

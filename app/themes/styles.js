@@ -10,9 +10,18 @@ const Styles = {
         color: Colors.TEXT_DARK
     },
 
+    TEXT_TITLE_SECONDARY_DARK: {
+        fontSize: Sizes.FONT_LARGE,
+        color: Colors.TEXT_DARK,
+    },
+
     TEXT_TITLE_LIGHT: {
         fontSize: Sizes.FONT_XLARGE,
         color: Colors.WHITE
+    },
+    TEXT_TITLE_SECONDARY_LIGHT: {
+        fontSize: Sizes.FONT_LARGE,
+        color: Colors.WHITE,
     },
 
     TEXT_BODY_DARK: {

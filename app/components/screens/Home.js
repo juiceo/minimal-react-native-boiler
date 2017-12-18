@@ -3,24 +3,46 @@ import PropTypes from 'prop-types';
 import {
     View,
     Text,
-    TouchableOpacity,
-    StyleSheet
+    StyleSheet,
+    FlatList
 } from 'react-native';
 
 import { connect } from 'react-redux';
+import _ from 'lodash';
+import fuzzysearch from 'fuzzysearch';
 
-import {Sizes, Colors, Styles} from '../../themes/';
+import { Sizes, Colors, Styles } from '../../themes/';
 import Actions from '../../actions/';
+import CountryService from '../../services/countryService';
 
+import CountryRow from '../partials/CountryRow';
+import SearchHeader from '../partials/SearchHeader';
+
+const SORT_OPTIONS = [
+    {
+        label: 'A-Z',
+        sortField: 'name'
+    },
+    {
+        label: 'Land Area',
+        sortField: 'area'
+    },
+    {
+        label: 'Population',
+        sortField: 'population'
+    }
+];
 
 class Home extends Component {
 
     static navigatorStyle = {
-        ...Styles.SCREEN_NO_HEADER
+
     };
 
     static propTypes = {
-        pressCount: PropTypes.number
+        countries: PropTypes.array,
+        error: PropTypes.bool,
+        loading: PropTypes.bool
     };
 
     static contextTypes = {
@@ -30,24 +52,113 @@ class Home extends Component {
     constructor(props) {
         super(props);
 
-        this.onButtonPress = this.onButtonPress.bind(this);
+        this.state = {
+            selectedSort: SORT_OPTIONS[0],
+            searchText: '',
+            reverse: false
+        }
+
+        this.refreshCountries = this.refreshCountries.bind(this);
     }
 
-    onButtonPress() {
-        const {store} = this.context;
+    componentWillMount() {
+        this.refreshCountries();
+    }
 
-        store.dispatch(Actions.incrementPressCount());
+    refreshCountries() {
+        this.context.store.dispatch(Actions.refreshCountries());
+    }
+
+    openCountryDetail(country) {
+
+        this.props.navigator.push({
+            screen: 'myApp.CountryDetail',
+            title: country.name,
+            passProps: {
+                country
+            }
+        });
+    }
+
+    sort(countries) {
+
+        let sorted = _.sortBy(countries, this.state.selectedSort.sortField);
+
+        if (this.state.reverse) {
+            sorted = _.reverse(sorted);
+        }
+
+        return sorted;
+    }
+
+    filter(countries) {
+        return _.filter(countries, (c) => fuzzysearch(this.state.searchText, c.name));
+    }
+
+    onSortChange(selectedSort) {
+        if (selectedSort === this.state.selectedSort) {
+            this.setState({
+                reverse: !this.state.reverse
+            });
+        }
+        else {
+            this.setState({ selectedSort });
+        }
+    }
+
+    renderListEmpty() {
+
+        if (this.props.loading) {
+            return null;
+        }
+
+        if (this.props.error) {
+            return (
+                <View style={styles.emptyWrapper}>
+                    <Text style={styles.emptyTitle}>{'Oh-oh!'}</Text>
+                    <Text style={styles.emptySubtitle}>{'Looks like something went wrong when trying to get the list of countries. Make sure you are connected to the internet, or try again later.'}</Text>
+                </View>
+            );
+        }
+
+        if (this.state.searchText !== '') {
+            return (
+                <View style={styles.emptyWrapper}>
+                    <Text style={styles.emptyTitle}>{'No matches for ' + this.state.searchText}</Text>
+                    <Text style={styles.emptySubtitle}>{'Are you sure you typed the name correctly?'}</Text>
+                </View>
+            );
+        }
+
+
+        return null;
     }
 
     render() {
+
+        let data = this.filter(this.sort(this.props.countries));
+
         return (
             <View style={styles.wrapper}>
-                <Text style={styles.title}>{'Minimal React Native Boiler'}</Text>
-                <Text style={styles.subtitle}>{'Happy coding!'}</Text>
+                <SearchHeader
+                    sortOptions={SORT_OPTIONS}
+                    selectedSort={this.state.selectedSort}
+                    searchText={this.state.searchText}
+                    onSortChange={(selectedSort) => this.onSortChange(selectedSort)}
+                    onTextChange={(searchText) => this.setState({ searchText })}
+                />
+                <FlatList
+                    style={styles.list}
+                    data={data}
+                    renderItem={({ item }) => <CountryRow country={item} onPress={() => this.openCountryDetail(item)} />}
+                    keyExtractor={(item) => item.alpha3Code}
+                    ItemSeparatorComponent={() => <View style={styles.separator} />}
 
-                <TouchableOpacity onPress={this.onButtonPress} activeOpacity={0.8}>
-                    <Text style={styles.button}>{'You have pressed me ' + this.props.pressCount + ' times'}</Text>
-                </TouchableOpacity>
+                    onRefresh={this.refreshCountries}
+                    refreshing={this.props.loading}
+
+                    ListEmptyComponent={() => this.renderListEmpty()}
+                />
             </View>
         );
     }
@@ -55,25 +166,37 @@ class Home extends Component {
 
 const styles = StyleSheet.create({
     wrapper: {
-        ...Styles.CENTERED_CONTAINER
+        flex: 1
     },
-    title: {
-        ...Styles.TEXT_TITLE_DARK
+    list: {
+        flex: 1,
+        backgroundColor: Colors.WHITE
     },
-    subtitle: {
-        ...Styles.TEXT_BODY_DARK
+    separator: {
+        height: 1,
+        backgroundColor: Colors.LIGHT_GREY
     },
-    button: {
-        marginTop: Sizes.DOUBLE_MARGIN,
-        padding: Sizes.BASE_MARGIN,
-        backgroundColor: Colors.BLACK,
-        color: Colors.WHITE,
+    emptyWrapper: {
+        padding: Sizes.DOUBLE_MARGIN,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    emptyTitle: {
+        fontSize: Sizes.FONT_LARGE,
+        fontWeight: 'bold',
+        textAlign: 'center'
+    },
+    emptySubtitle: {
+        marginTop: 5,
+        textAlign: 'center'
     }
 });
 
 function mapStateToProps(state) {
     return {
-        pressCount: state.example.pressCount
+        countries: state.countries.all,
+        loading: state.countries.loading,
+        error: state.countries.error
     };
 }
 

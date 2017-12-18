@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
-import example from './example';
+import countries from './countries';
 
 const rootReducer = combineReducers({
-    example,
+    countries,
     // TODO: Add other reducers here
 });
 

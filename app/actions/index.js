@@ -1,7 +1,7 @@
-import * as ExampleActions from './example';
+import * as CountryActions from './countries';
 
 const actions = {
-    ...ExampleActions,
+    ...CountryActions,
     // TODO: Add other actions here
 };
 
