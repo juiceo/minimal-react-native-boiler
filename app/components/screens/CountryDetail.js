@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     header: {
-        height: Sizes.SCREEN_WIDTH * 0.6,
+        height: Sizes.HEADER_HEIGHT,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: Colors.LIGHT_GREY

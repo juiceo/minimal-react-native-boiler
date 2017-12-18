@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     textWrapper: {
-        padding: 10,
+        padding: Sizes.BASE_MARGIN,
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'flex-start'

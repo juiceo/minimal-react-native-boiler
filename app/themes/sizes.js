@@ -5,9 +5,11 @@ const Sizes = {
 
     BASE_MARGIN: 10,
     DOUBLE_MARGIN: 20,
-    
+
     SCREEN_WIDTH: Dimensions.get('window').width,
     SCREEN_HEIGHT: Dimensions.get('window').height,
+
+    HEADER_HEIGHT: Dimensions.get('window').width * 0.6,
 
     FONT_SMALL: 12,
     FONT_NORMAL: 14,
