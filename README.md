@@ -14,12 +14,11 @@ To start using this boilerplate, just do the following:
 ```
 git clone git@github.com:lappalj4/minimal-react-native-boiler.git
 cd minimal-react-native-boiler
-rm -rf .git .gitattributes
-```
 
-If you wish to start building on the countries-example version of this boilerplate, remember to checkout the correct branch: 
-```
+// If you wish to use the countries-example branch instead of the barebones version
 git checkout countries-example
+
+rm -rf .git .gitattributes
 ```
 
 That's it! If you wish to rename the app and package names, you can run (from the root):
