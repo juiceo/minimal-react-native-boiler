@@ -40,3 +40,5 @@ react-native-rename yourAppName
 * Simple app that lists all countries, has some sort and filter functionality and navigation examples
 * Showcases some best practices (in my personal opinion) regarding redux/styling/structure etc.
 * NOTE: scroll performance takes quite a big hit because the country flag images are links to .svg's, and must thus be displayed in a webview.
+
+Countries Example .apk [download](https://github.com/lappalj4/minimal-react-native-boiler/raw/master/app-release.apk)
