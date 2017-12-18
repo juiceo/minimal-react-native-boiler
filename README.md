@@ -17,6 +17,11 @@ cd minimal-react-native-boiler
 rm -rf .git .gitattributes
 ```
 
+If you wish to start building on the countries-example version of this boilerplate, remember to checkout the correct branch: 
+```
+git checkout countries-example
+```
+
 That's it! If you wish to rename the app and package names, you can run (from the root):
 
 ```
@@ -33,5 +38,5 @@ react-native-rename yourAppName
 
 **Countries Example**
 * `countries-example` branch of this repository ([here](https://github.com/lappalj4/minimal-react-native-boiler/tree/countries-example))
-* Contains a slightly bigger example, which uses a few essential libraries and utility functions
-* Showcases some best practices (in my personal opinion) regarding redux/styling/structure among other things
+* Simple app that lists all countries, has some sort and filter functionality and navigation examples
+* Showcases some best practices (in my personal opinion) regarding redux/styling/structure etc.
