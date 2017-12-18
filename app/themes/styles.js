@@ -41,7 +41,12 @@ const Styles = {
     },
 
     SCREEN_NO_HEADER: {
+        screenBackgroundColor: Colors.WHITE,
         navBarHidden: true
+    },
+
+    SCREEN_DEFAULT: {
+        screenBackgroundColor: Colors.WHITE
     }
 }
 

@@ -38,8 +38,6 @@ class SearchHeader extends PureComponent {
     }
 
     expand(expanded) {
-        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-
         this.setState({
             expanded
         });
@@ -72,6 +70,7 @@ class SearchHeader extends PureComponent {
                     onFocus={() => this.expand(true)}
                     onEndEditing={() => this.expand(false)}
                     clearButtonMode={'while-editing'}
+                    underlineColorAndroid={'transparent'}
                 />
                 {this.state.expanded ?
                     <View style={styles.sortWrapper}>

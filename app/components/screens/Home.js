@@ -33,10 +33,12 @@ const SORT_OPTIONS = [
     }
 ];
 
+const ITEM_HEIGHT = 90;
+
 class Home extends Component {
 
     static navigatorStyle = {
-
+        ...Styles.SCREEN_DEFAULT
     };
 
     static propTypes = {
@@ -136,7 +138,7 @@ class Home extends Component {
 
     render() {
 
-        let data = this.filter(this.sort(this.props.countries));
+        const data = this.filter(this.sort(this.props.countries));
 
         return (
             <View style={styles.wrapper}>
@@ -150,7 +152,7 @@ class Home extends Component {
                 <FlatList
                     style={styles.list}
                     data={data}
-                    renderItem={({ item }) => <CountryRow country={item} onPress={() => this.openCountryDetail(item)} />}
+                    renderItem={({ item }) => <CountryRow height={ITEM_HEIGHT} country={item} onPress={() => this.openCountryDetail(item)} />}
                     keyExtractor={(item) => item.alpha3Code}
                     ItemSeparatorComponent={() => <View style={styles.separator} />}
 
@@ -158,6 +160,11 @@ class Home extends Component {
                     refreshing={this.props.loading}
 
                     ListEmptyComponent={() => this.renderListEmpty()}
+                    initialNumToRender={6}
+                    getItemLayout={(data, index) => (
+                        { length: ITEM_HEIGHT, offset: (ITEM_HEIGHT * index) + index, index }
+                    )}
+                    removeClippedSubviews={true}
                 />
             </View>
         );

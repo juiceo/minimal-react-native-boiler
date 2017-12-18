@@ -17,17 +17,25 @@ class CountryRow extends PureComponent {
 
     static propTypes = {
         country: PropTypes.object,
-        onPress: PropTypes.func
+        onPress: PropTypes.func,
+        height: PropTypes.number
     };
 
     render() {
 
-        const { country } = this.props;
+        const { country, height } = this.props;
+
+        const wrapperStyle = {
+            flexDirection: 'row',
+            alignItems: 'center',
+            paddingHorizontal: Sizes.BASE_MARGIN,
+            height
+        }
 
         return (
             <TouchableOpacity activeOpacity={0.7} onPress={this.props.onPress}>
-                <View style={styles.wrapper}>
-                    <RoundImage uri={country.flag} size={80} zoom={2} />
+                <View style={wrapperStyle}>
+                    <RoundImage uri={country.flag} size={height - Sizes.DOUBLE_MARGIN} zoom={2} />
                     <View style={styles.textWrapper}>
                         <Text numberOfLines={1} style={styles.countryName}>{country.name}</Text>
                         <Text style={styles.population}>{'Population: ' + country.population}</Text>
@@ -45,33 +53,9 @@ class CountryRow extends PureComponent {
 const IMAGE_SIZE = 80;
 
 const styles = StyleSheet.create({
-    wrapper: {
-        padding: Sizes.BASE_MARGIN,
-        flexDirection: 'row'
-    },
-    name: {
-        padding: Sizes.BASE_MARGIN,
-        backgroundColor: Colors.BLACK,
-        color: Colors.WHITE
-    },
-    imageWrapper: {
-        width: IMAGE_SIZE,
-        height: IMAGE_SIZE,
-        borderRadius: IMAGE_SIZE / 2,
-        backgroundColor: Colors.LIGHT_GREY,
-        overflow: 'hidden',
-        position: 'relative',
-    },
-    image: {
-        width: IMAGE_SIZE * 2,
-        height: IMAGE_SIZE * 2,
-        position: 'absolute',
-        top: IMAGE_SIZE / -2,
-        left: IMAGE_SIZE / -2,
-    },
     textWrapper: {
         flexDirection: 'column',
-        paddingHorizontal: Sizes.BASE_MARGIN,
+        padding: Sizes.BASE_MARGIN,
         flex: 1,
     },
     countryName: {

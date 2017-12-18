@@ -49,6 +49,7 @@ class RoundImage extends PureComponent {
                     style={imageStyle}
                     source={{ uri }}
                     scrollEnabled={false}
+                    renderLoading={null}
                 />
             </View>
         );
