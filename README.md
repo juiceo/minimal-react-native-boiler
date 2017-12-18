@@ -32,6 +32,6 @@ react-native-rename yourAppName
 * Contains one screen and a very minimal example of how to use redux
 
 **Countries Example**
-* `countries-example` branch of this repository
+* `countries-example` branch of this repository ([here](https://github.com/lappalj4/minimal-react-native-boiler/tree/countries-example))
 * Contains a slightly bigger example, which uses a few essential libraries and utility functions
 * Showcases some best practices (in my personal opinion) regarding redux/styling/structure among other things
